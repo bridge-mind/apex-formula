@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APEX FORMULA — Multiplayer</title>
+    <style>
+      html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: system-ui, sans-serif; color: #fff; }
+      #game-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+      .panel { position: absolute; background: rgba(10,12,18,.82); border: 1px solid #2b3245; border-radius: 10px; padding: 16px; }
+      #lobby { left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(420px, 90vw); }
+      #lobby h1 { margin: 0 0 12px; font-size: 20px; letter-spacing: .08em; font-style: italic; }
+      #lobby input, #lobby button { width: 100%; box-sizing: border-box; margin: 4px 0; padding: 10px; border-radius: 6px; border: 1px solid #39425a; background: #151a27; color: #fff; font-size: 15px; }
+      #lobby button { background: #e10600; border: 0; font-weight: 700; cursor: pointer; }
+      #lobby button:disabled { background: #444; cursor: default; }
+      #players { margin: 8px 0; font-size: 14px; line-height: 1.6; }
+      #msg { font-size: 13px; color: #ffb4b0; min-height: 18px; }
+      #hud { left: 16px; bottom: 16px; min-width: 190px; display: none; }
+      #speed { font-size: 40px; font-weight: 800; font-style: italic; }
+      #speed small { font-size: 14px; font-weight: 500; opacity: .7; }
+      #tower { right: 16px; top: 16px; min-width: 180px; font-size: 14px; display: none; }
+      #big { position: absolute; left: 50%; top: 30%; transform: translateX(-50%); font-size: 96px; font-weight: 900; font-style: italic; text-shadow: 0 4px 20px #000; display: none; }
+      #results { left: 50%; top: 50%; transform: translate(-50%,-50%); display: none; min-width: 260px; }
+    </style>
+  </head>
+  <body>
+    <canvas id="game-canvas"></canvas>
+    <div id="big"></div>
+    <div id="lobby" class="panel">
+      <h1>APEX FORMULA · MULTIPLAYER</h1>
+      <input id="name" placeholder="Nama pembalap" maxlength="20" />
+      <input id="url" placeholder="Alamat server (ws://...)" />
+      <button id="join">GABUNG</button>
+      <div id="players"></div>
+      <button id="start" style="display:none">MULAI BALAPAN (host)</button>
+      <div id="msg"></div>
+    </div>
+    <div id="hud" class="panel"><div id="speed">0 <small>km/h</small></div><div id="info"></div></div>
+    <div id="tower" class="panel"></div>
+    <div id="results" class="panel"></div>
+    <script type="module" src="/src/net/mp-main.ts"></script>
+  </body>
+</html>

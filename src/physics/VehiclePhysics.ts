@@ -298,6 +298,24 @@ export class VehiclePhysics implements IVehiclePhysics {
     c.state.engine.gear = 1;
   }
 
+  /**
+   * Network reconciliation (multiplayer client): overwrite the rigid-body state of a car with an authoritative one.
+   * Tyre, suspension and drivetrain state stay as simulated locally; only pose and velocities are replaced.
+   */
+  setBodyState(carId: number, position: THREE.Vector3, quaternion: THREE.Quaternion, velocity: THREE.Vector3, angularVelocity: THREE.Vector3): void {
+    const c = this.cars[carId];
+    if (!c) return;
+    const st = c.state;
+    st.position.copy(position);
+    st.quaternion.copy(quaternion);
+    updateAxes(c);
+    c.com.copy(position).addScaledVector(c.up, COM_HEIGHT).addScaledVector(c.fwd, COM_Z);
+    st.velocity.copy(velocity);
+    st.angularVelocity.copy(angularVelocity);
+    c.prevVel.copy(velocity);
+    c.frameValid = false;
+  }
+
   setDrsAvailable(carId: number, available: boolean): void {
     const c = this.cars[carId];
     if (c) c.state.drs.available = available;

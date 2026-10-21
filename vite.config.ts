@@ -7,5 +7,6 @@ export default defineConfig({
     target: 'es2022',
     sourcemap: false,
     chunkSizeWarningLimit: 4000,
+    rollupOptions: { input: { main: 'index.html', multiplayer: 'multiplayer.html' } },
   },
 });
